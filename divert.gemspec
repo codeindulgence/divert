@@ -7,11 +7,11 @@ require "divert/version"
 Gem::Specification.new do |s|
   s.name        = "divert"
   s.version     = Divert::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Divert."
-  s.description = "TODO: Description of Divert."
+  s.authors     = ["Nick Butler"]
+  s.email       = ["nick@codeindulgence.com"]
+  s.homepage    = "codeindulgence.com"
+  s.summary     = "Easily handle 404s and redirects with your rails app."
+  s.description = "Adds a route helper and controller action to catch 404 pages. 404s are stored in the database where a redirect can be set up."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
