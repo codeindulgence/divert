@@ -1,3 +1,23 @@
 = Divert
 
 This project rocks and uses MIT-LICENSE.
+
+Currently, in order to use:
+  gem 'divert', :git => 'ssh://git@vcs.hhd.com.au/var/git/repos/divert.git'
+
+Install the migrations with
+  rake divert:install:migrations
+  rake db:migrate
+
+Then add:
+  divert_with :controller_name
+to the END of your routes file.
+The rout added catches anything so needs to go last.
+
+Finally add:
+  include Divert
+to the controller specified in the above route.
+
+It will not interfere with actions defined in that controller
+or view files that don't have an action defined.
+Cos it's nice like that.
