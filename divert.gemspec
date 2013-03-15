@@ -8,8 +8,7 @@ Gem::Specification.new do |s|
   s.name        = "divert"
   s.version     = Divert::VERSION
   s.authors     = ["Nick Butler"]
-  s.email       = ["nick@codeindulgence.com"]
-  s.homepage    = "codeindulgence.com"
+  s.email       = ["nick@hhd.com"]
   s.summary     = "Easily handle 404s and redirects with your rails app."
   s.description = "Adds a route helper and controller action to catch 404 pages. 404s are stored in the database where a redirect can be set up."
 
