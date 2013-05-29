@@ -1,13 +1,17 @@
 require "divert/engine"
 
 module Divert
-  def divert
-    if template_exists?(params[:path], [controller_name])
-        render "#{controller_name}/#{params[:path]}" and return
+  def action_missing path
+    puts "DIVERTIO!"
+    path ||= params[:path]
+    if action_methods.include? path
+      puts "SENDING METHOD: #{path}"
+      send path and return
     end
 
-    if action_methods.include? params[:path]
-      send params[:path] and return
+    if template_exists?(path, [controller_name])
+      puts "RENDERING METHOD: #{path}"
+      render "#{controller_name}/#{path}" and return
     end
 
     if (redirect = Redirect.hit request.fullpath)
@@ -16,12 +20,14 @@ module Divert
       unless template_exists? 'divert', [controller_name]
         render text:"Missing divert view: #{controller_name}/divert.html.erb" and return
       end
+      render "#{controller_name}/divert" and return
     end
   end
 end
 
 class ActionDispatch::Routing::Mapper
   def divert_with controller
-    match '*path' => "#{controller}#divert", :format => false
+    match ":action" => "static"
+    match '*path' => "#{controller}#action_missing", :format => false
   end
 end
