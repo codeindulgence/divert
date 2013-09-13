@@ -15,9 +15,9 @@ module Divert
       redirect_to redirect
     else
       unless template_exists? 'divert', [controller_name]
-        render text:"Missing divert view: #{controller_name}/divert.html.erb" and return
+        render text:"Missing divert view: #{controller_name}/divert.html.erb", :status => 404 and return
       end
-      render "#{controller_name}/divert" and return
+      render "#{controller_name}/divert", :status => 404 and return
     end
   end
 end
