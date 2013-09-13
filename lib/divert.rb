@@ -4,12 +4,10 @@ module Divert
   def action_missing path
     path ||= params[:path]
     if action_methods.include? path
-      puts "SENDING METHOD: #{path}"
       send path and return
     end
 
     if template_exists?(path, [controller_name])
-      puts "RENDERING METHOD: #{path}"
       render "#{controller_name}/#{path}" and return
     end
 
