@@ -1,7 +1,7 @@
 require "divert/engine"
 
 module Divert
-  def action_missing path
+  def action_missing path = nil
     path ||= params[:path]
     if action_methods.include? path
       send path and return
