@@ -2,7 +2,6 @@ require "divert/engine"
 
 module Divert
   def action_missing path
-    puts "DIVERTIO!"
     path ||= params[:path]
     if action_methods.include? path
       puts "SENDING METHOD: #{path}"
