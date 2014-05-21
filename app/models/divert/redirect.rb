@@ -2,9 +2,6 @@ module Divert
   class Redirect < ActiveRecord::Base
     ANTISLASH = /^\/|\/\s*$/
 
-    # Attribute accessibility
-    attr_accessible :active, :hither, :hits, :thither
-
     # Validations
     validates :hither, presence:true
 
