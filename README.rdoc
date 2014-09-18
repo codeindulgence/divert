@@ -3,7 +3,7 @@
 This project rocks and uses MIT-LICENSE.
 
 Currently, in order to use:
-  gem 'divert', :git => 'ssh://git@vcs.hhd.com.au/var/git/repos/divert.git'
+  gem 'divert'
 
 Install the migrations with
   rake divert:install:migrations

@@ -3,8 +3,8 @@ class CreateDivertRedirects < ActiveRecord::Migration
     create_table :divert_redirects do |t|
       t.string :hither
       t.string :thither
-      t.integer :hits
-      t.boolean :active, :default => true
+      t.integer :hits, default: 0
+      t.boolean :active, default: true
 
       t.timestamps
     end

@@ -24,7 +24,7 @@ end
 
 class ActionDispatch::Routing::Mapper
   def divert_with controller
-    match ":action" => "static"
-    match '*path' => "#{controller}#action_missing", :format => false
+    get ':action' => controller.to_s
+    get '*path' => "#{controller}#action_missing", :format => false
   end
 end
