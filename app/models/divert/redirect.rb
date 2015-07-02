@@ -21,6 +21,6 @@ module Divert
     end
 
     # Scopes
-    scope :active, :conditions => {:active => true}
+    scope :active, -> { where(:active => true) }
   end
 end
