@@ -1,7 +1,7 @@
 module Divert
   class Redirect < ActiveRecord::Base
     # Validations
-    validates :hither, presence:true
+    validates :hither, presence:true, uniqueness:true
 
     # Instance Methods
     def name
@@ -21,6 +21,6 @@ module Divert
     end
 
     # Scopes
-    scope :active, :conditions => {:active => true}
+    scope :active, -> { where(:active => true) }
   end
 end
