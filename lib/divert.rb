@@ -1,7 +1,22 @@
 require "divert/engine"
+require "divert/configuration"
 
 module Divert
+
+  class << self
+    attr_accessor :configuration
+  end
+
+  def self.configuration
+    @configuration ||= Configuration.new
+  end
+
+  def self.configure
+    yield(configuration)
+  end
+
   def action_missing path = nil
+
     path ||= params[:path]
     if action_methods.include? path
       send path and return
@@ -11,7 +26,7 @@ module Divert
       render "#{controller_name}/#{path}" and return
     end
 
-    if (redirect = Redirect.hit request.fullpath)
+    if Divert.configuration.save_to_db && (redirect = Redirect.hit(request.fullpath))
       redirect_to redirect
     else
       unless template_exists? 'divert', [controller_name]
