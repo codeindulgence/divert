@@ -22,7 +22,7 @@ It will not interfere with actions defined in that controller
 or view files that don't have an action defined.
 Cos it's nice like that.
 
-By default, Divert will hit the database to find or create a record. To turn off this behaviour, add this line after including Divert in your controller:
+By default, Divert will hit the database to find or create a record. To turn off this behaviour, add this following configuration code in your `config/initializers/divert.rb` :
   Divert.configure do |config|
     config.save_to_db = false
   end
