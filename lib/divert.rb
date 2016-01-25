@@ -16,7 +16,6 @@ module Divert
   end
 
   def action_missing path = nil
-    binding.pry
     controller = Divert.configuration.controller || controller_name
 
     path ||= params[:path]
