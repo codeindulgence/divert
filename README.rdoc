@@ -15,10 +15,16 @@ to the END of your routes file.
 The route added catches anything so needs to go last.
 
 Finally add:
-  include Divert
-to the controller specified in the above route.
+  class ApplicationController < ActionController::Base
+    include Divert
 
-It will not interfere with actions defined in that controller
+    rescue_from ActiveRecord::RecordNotFound do |exception|
+      divert(request.env['PATH_INFO'])
+    end
+  end
+to your ApplicationController. The `rescue_from ActiveRecord::RecordNotFound` is optional, but allows Divert to recover from `Model.find(...)` errors with a redirect or 404.
+
+It will not interfere with actions defined in the configured controller
 or view files that don't have an action defined.
 Cos it's nice like that.
 
