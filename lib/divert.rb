@@ -30,10 +30,10 @@ module Divert
     if Divert.configuration.save_to_db && (redirect = Redirect.hit(request.fullpath))
       redirect_to redirect
     else
-      unless template_exists? 'divert', [controller]
+      unless template_exists? 'divert.html.erb', [controller]
         render text:"Missing divert view: #{controller}/divert.html.erb", :status => 404 and return
       end
-      render "#{controller}/divert", :status => 404 and return
+      render "#{controller}/divert.html.erb", :status => 404 and return
     end
   end
 
