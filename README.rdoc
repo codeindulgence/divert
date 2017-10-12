@@ -44,6 +44,6 @@ To turn on clientside redirects, add this following configuration code in your `
 
 Divert expects a view named <tt>[controller_name]/divert_clientside.html.erb</tt>, which you will need to create.
 
-You will need to handle the clientside logic yourself. You have access to the redirect destinaion in the <tt>params[:divert_redirect_to]</tt> paramter.
+You will need to handle the clientside logic yourself. You have access to the redirect destination in the <tt>params[:divert_redirect_to]</tt> paramter.
 
 
