@@ -23,9 +23,12 @@ module Divert
       send path and return
     end
 
+    #use rails template_exists? method to check if view exists in the view dir
+    #corresponding to the controller name. If so, render the view.
     if template_exists?(path, [controller])
       render "#{controller}/#{path}" and return
     end
+
 
     if Divert.configuration.save_to_db && (redirect = Redirect.hit(request.fullpath))
       redirect_to redirect
