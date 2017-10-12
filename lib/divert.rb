@@ -36,7 +36,7 @@ module Divert
           render text:"Missing divert view: #{controller}/divert_clientside.html.erb", :status => 404 and return
         else
           params[:divert_redirect_to] = redirect
-          render "#{controller}/divert_clientside.html.erb", :layout => false, :status => 404 and return
+          render "#{controller}/divert_clientside.html.erb", :layout => false, :status => 302 and return
         end
 
       else
