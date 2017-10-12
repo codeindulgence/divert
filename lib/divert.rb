@@ -31,7 +31,13 @@ module Divert
 
     if Divert.configuration.save_to_db && (redirect = Redirect.hit(request.fullpath))
       if Divert.configuration.redirect_clientside
-        render "#{controller}/divert_clientside.html.erb", :layout => false, :status => 404 and return
+
+        unless template_exists? 'divert_clientside.html.erb', [controller]
+          render text:"Missing divert view: #{controller}/divert_clientside.html.erb", :status => 404 and return
+        else
+          render "#{controller}/divert_clientside.html.erb", :layout => false, :status => 404 and return
+        end
+
       else
         redirect_to redirect
       end
