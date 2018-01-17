@@ -40,7 +40,7 @@ module Divert
         end
 
       else
-        redirect_to redirect
+        redirect_to redirect, :status => 301
       end
     else
       unless template_exists? 'divert.html.erb', [controller]
