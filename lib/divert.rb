@@ -15,6 +15,10 @@ module Divert
     yield(configuration)
   end
 
+  def hit_path(request)
+    request.fullpath.chomp("/")
+  end
+
   def action_missing path = nil
     controller = Divert.configuration.controller || controller_name
 
@@ -29,13 +33,16 @@ module Divert
       render "#{controller}/#{path}" and return
     end
 
-    if Divert.configuration.save_to_db && (redirect = Redirect.hit(request.fullpath))
+    divert = Redirect.find_or_create_by(hither: hit_path(request))
+
+    if Divert.configuration.save_to_db && (redirect = divert.hit)
       if Divert.configuration.redirect_clientside
 
         unless template_exists? 'divert_clientside.html.erb', [controller]
           render text:"Missing divert view: #{controller}/divert_clientside.html.erb", :status => 404 and return
         else
           params[:divert_redirect_to] = redirect
+          params[:divert_redirect_from] = divert.hither
           render "#{controller}/divert_clientside.html.erb", :layout => false, :status => 301 and return
         end
 
