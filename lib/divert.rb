@@ -32,8 +32,8 @@ module Divert
     if template_exists?(path, [controller])
       render "#{controller}/#{path}" and return
     end
-   
-    divert = Redirect.find_or_create_by(hither: hit_path(request)) 
+
+    divert = Redirect.find_or_create_by(hither: hit_path(request))
 
     if Divert.configuration.save_to_db && (redirect = divert.hit)
       if Divert.configuration.redirect_clientside
@@ -43,7 +43,7 @@ module Divert
         else
           params[:divert_redirect_to] = redirect
           params[:divert_redirect_from] = divert.hither
-          render "#{controller}/divert_clientside.html.erb", :layout => false, :status => 302 and return
+          render "#{controller}/divert_clientside.html.erb", :layout => false, :status => 301 and return
         end
 
       else
