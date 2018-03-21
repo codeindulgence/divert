@@ -37,7 +37,7 @@ module Divert
       divert = Redirect.find_or_create_by(hither: hit_path(request))
     end
     
-    if defined?(divert) && (redirect = divert.hit)
+    if Divert.configuration.save_to_db && defined?(divert) && (redirect = divert.hit)
       if Divert.configuration.redirect_clientside
 
         unless template_exists? 'divert_clientside.html.erb', [controller]
