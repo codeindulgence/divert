@@ -33,11 +33,14 @@ module Divert
       render "#{controller}/#{path}" and return
     end
     
-    if Divert.configuration.save_to_db
-      divert = Redirect.find_or_create_by(hither: hit_path(request))
-    end
+
+    divert = if Divert.configuration.save_to_db
+               Redirect.find_or_create_by(hither: hit_path(request))
+             else
+               Redirect.find_by(hither: hit_path(request))
+             end
     
-    if Divert.configuration.save_to_db && defined?(divert) && (redirect = divert.hit)
+    if divert && (redirect = divert.hit)
       if Divert.configuration.redirect_clientside
 
         unless template_exists? 'divert_clientside.html.erb', [controller]
