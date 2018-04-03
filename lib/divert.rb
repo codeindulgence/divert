@@ -32,14 +32,14 @@ module Divert
     if template_exists?(path, [controller])
       render "#{controller}/#{path}" and return
     end
-    
+
 
     divert = if Divert.configuration.save_to_db
                Redirect.find_or_create_by(hither: hit_path(request))
              else
                Redirect.find_by(hither: hit_path(request))
              end
-    
+
     if divert && (redirect = divert.hit)
       if Divert.configuration.redirect_clientside
 
@@ -66,10 +66,10 @@ module Divert
 end
 
 class ActionDispatch::Routing::Mapper
-  def divert_with controller
+  def divert_with controller, :constraints => nil
     # Set controller in configuration if not already set
     Divert.configuration.controller ||= controller.to_s
-    get ':action' => controller.to_s
-    get '*path' => "#{controller}#action_missing", :format => false
+    get ':action' => controller.to_s, :constraints => constraints
+    get '*path' => "#{controller}#action_missing", :format => false, :constraints => constraints
   end
 end
