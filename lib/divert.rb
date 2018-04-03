@@ -66,7 +66,7 @@ module Divert
 end
 
 class ActionDispatch::Routing::Mapper
-  def divert_with controller, :constraints => nil
+  def divert_with controller, constraints: nil
     # Set controller in configuration if not already set
     Divert.configuration.controller ||= controller.to_s
     get ':action' => controller.to_s, :constraints => constraints
