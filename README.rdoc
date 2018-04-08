@@ -32,3 +32,19 @@ By default, Divert will hit the database to find or create a record. To turn off
   Divert.configure do |config|
     config.save_to_db = false
   end
+
+== Diverting Clientside
+
+By default, the Divert gem will redirect from the server. However, there are times you might want to redirect from clientside, for example, if you have to do some custom analytics tracking using a clientside script, such as Google Analytics.
+
+To turn on clientside redirects, add this following configuration code in your `config/initializers/divert.rb` :
+  Divert.configure do |config|
+    config.redirect_clientside = true
+  end
+
+Divert expects a view named <tt>[controller_name]/divert_clientside.html.erb</tt>, which you will need to create.
+
+You will need to handle the clientside logic yourself. You have access to the following parameters: <tt>params[:divert_redirect_to]</tt> and <tt>params[:divert_redirect_from]</tt>.
+
+
+
